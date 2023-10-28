@@ -2,6 +2,7 @@ import numpy as np
 import streamlit as st
 import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
+import requests
 
 
 def _register_embedding_list_hook(model, embeddings_list):
@@ -67,9 +68,9 @@ def highlight_top_words(tokens, top_indices):
     return ' '.join(highlighted_text)
 
 def run_ml_model(text):
-    tokenizer = AutoTokenizer.from_pretrained("dlentr/lie_detection_distilbert", token=auth_token)
-    model = AutoModelForSequenceClassification.from_pretrained("dlentr/lie_detection_distilbert", token=auth_token)
-    inputs = tokenizer.encode(text, padding=True, truncation=True, return_tensors='pt')
+    # tokenizer = AutoTokenizer.from_pretrained("dlentr/lie_detection_distilbert", token=auth_token)
+    # model = AutoModelForSequenceClassification.from_pretrained("dlentr/lie_detection_distilbert", token=auth_token)
+    # inputs = tokenizer.encode(text, padding=True, truncation=True, return_tensors='pt')
     # # input_ids = inputs[0].tolist()
     # outputs = model(inputs)
     # logits = outputs.logits
@@ -85,20 +86,7 @@ def run_ml_model(text):
     # else:
     #     result = 'False'
     #     confidence = round(probability_class_1*100,2) 
-    
-    # Salience
-    salience_tokens = tokenizer.convert_ids_to_tokens(inputs[0])
-    tokens = tokenizer(text)
-    input_ids = torch.tensor([tokens['input_ids']], dtype=torch.long) #perhaps has to be filled to size of tensor
-    attention_ids = torch.tensor([tokens['attention_mask']], dtype=torch.long)
-
-    saliency_scores = saliency_map(model, input_ids, attention_ids)
-
-    top_indices = get_top_indices(saliency_scores, num_top_tokens)
-    highlighted_text = highlight_top_words(salience_tokens, top_indices)
-
-    import requests
-
+ 
     def query(payload):
         response = requests.post(API_URL, headers=headers, json=payload)
         return response.json()
@@ -126,8 +114,19 @@ def run_ml_model(text):
         result = 'Lie'
         confidence = round(confidence*100,2) 
     
-    # print('result is', prediction) # POSITIVE is 1, NEGATIVE is 0
-    # highlighted_text = ""
+    # Salience
+    tokenizer = AutoTokenizer.from_pretrained("dlentr/lie_detection_distilbert")
+    model = AutoModelForSequenceClassification.from_pretrained("dlentr/lie_detection_distilbert")
+    inputs = tokenizer.encode(text, padding=True, truncation=True, return_tensors='pt')
+    salience_tokens = tokenizer.convert_ids_to_tokens(inputs[0])
+    tokens = tokenizer(text)
+    input_ids = torch.tensor([tokens['input_ids']], dtype=torch.long) #perhaps has to be filled to size of tensor
+    attention_ids = torch.tensor([tokens['attention_mask']], dtype=torch.long)
+
+    saliency_scores = saliency_map(model, input_ids, attention_ids)
+
+    top_indices = get_top_indices(saliency_scores, num_top_tokens)
+    highlighted_text = highlight_top_words(salience_tokens, top_indices)
 
     return result, confidence, highlighted_text
 
