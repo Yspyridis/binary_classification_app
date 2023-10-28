@@ -67,37 +67,55 @@ def highlight_top_words(tokens, top_indices):
     return ' '.join(highlighted_text)
 
 def run_ml_model(text):
-    tokenizer = AutoTokenizer.from_pretrained("dlentr/lie_detection_distilbert", token=auth_token)
-    model = AutoModelForSequenceClassification.from_pretrained("dlentr/lie_detection_distilbert", token=auth_token)
-    inputs = tokenizer.encode(text, padding=True, truncation=True, return_tensors='pt')
-    # input_ids = inputs[0].tolist()
-    outputs = model(inputs)
-    logits = outputs.logits
+    # tokenizer = AutoTokenizer.from_pretrained("dlentr/lie_detection_distilbert", token=auth_token)
+    # model = AutoModelForSequenceClassification.from_pretrained("dlentr/lie_detection_distilbert", token=auth_token)
+    # inputs = tokenizer.encode(text, padding=True, truncation=True, return_tensors='pt')
+    # # input_ids = inputs[0].tolist()
+    # outputs = model(inputs)
+    # logits = outputs.logits
 
-    probabilities = torch.softmax(logits, dim=1)
-    probability_class_0 = probabilities[0, 0].item()
-    probability_class_1 = probabilities[0, 1].item()
-    predicted_label = torch.argmax(probabilities, dim=1).item()
+    # probabilities = torch.softmax(logits, dim=1)
+    # probability_class_0 = probabilities[0, 0].item()
+    # probability_class_1 = probabilities[0, 1].item()
+    # predicted_label = torch.argmax(probabilities, dim=1).item()
     
-    if predicted_label == 0:
-        result = 'True'
-        confidence = round(probability_class_0*100,2)
-    else:
-        result = 'False'
-        confidence = round(probability_class_1*100,2) 
+    # if predicted_label == 0:
+    #     result = 'True'
+    #     confidence = round(probability_class_0*100,2)
+    # else:
+    #     result = 'False'
+    #     confidence = round(probability_class_1*100,2) 
     
     # Salience
-    salience_tokens = tokenizer.convert_ids_to_tokens(inputs[0])
-    tokens = tokenizer(text)
-    input_ids = torch.tensor([tokens['input_ids']], dtype=torch.long) #perhaps has to be filled to size of tensor
-    attention_ids = torch.tensor([tokens['attention_mask']], dtype=torch.long)
+    # salience_tokens = tokenizer.convert_ids_to_tokens(inputs[0])
+    # tokens = tokenizer(text)
+    # input_ids = torch.tensor([tokens['input_ids']], dtype=torch.long) #perhaps has to be filled to size of tensor
+    # attention_ids = torch.tensor([tokens['attention_mask']], dtype=torch.long)
 
-    saliency_scores = saliency_map(model, input_ids, attention_ids)
+    # saliency_scores = saliency_map(model, input_ids, attention_ids)
 
-    top_indices = get_top_indices(saliency_scores, num_top_tokens)
-    highlighted_text = highlight_top_words(salience_tokens, top_indices)
-    # highlighted_text = ""
+    # top_indices = get_top_indices(saliency_scores, num_top_tokens)
+    # highlighted_text = highlight_top_words(salience_tokens, top_indices)
 
+    import requests
+
+    def query(payload):
+        response = requests.post(API_URL, headers=headers, json=payload)
+        return response.json()
+
+    API_URL = "https://api-inference.huggingface.co/models/dlentr/lie_detection_distilbert"
+    headers = {"Authorization": f"Bearer {auth_token}"}
+
+
+
+    output = query({
+        "inputs": text,
+    })
+
+    print(output) # POSITIVE is 1, NEGATIVE is 0
+    highlighted_text = ""
+    result = "1"
+    confidence = "1"
     return result, confidence, highlighted_text
 
 # Steamlit functions
