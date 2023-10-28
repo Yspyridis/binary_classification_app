@@ -1,14 +1,14 @@
-# Lie Detection in defense arguments with AI
+# Defence argument classifier
 
 This web application uses AI-powered natural language processing to analyse legal defense arguments and uncover the truth. It provides lie detection results (truthful or not) and highlights the words that mostly affect the outcome.
 
 ## Features
 
-- Classification of defense arguments.
-- Confidence score for the results.
-- Highlighting of important words in the provided text.
+- Binary classification of defense arguments.
+- Confidence score for the classification.
+- Explainability through highlighting of important words that affect the outcome.
 - User-friendly web interface.
-- Utilises a state-of-the-art DistilBERT model for classification and saliency analysis.
+- Based on a state-of-the-art fine-tuned DistilBERT model for classification and saliency analysis.
 
 ## Preview
 
@@ -17,11 +17,11 @@ This web application uses AI-powered natural language processing to analyse lega
 ## Usage
 
 1. Enter a defense argument without using quotation marks.
-2. Alternatively select one from the provided list.
-3. Click the "Detect" button to obtain lie detection results.
+2. Alternatively select an argument from the provided list.
+3. Click the "Detect" button to obtain the lie detection outcome.
 4. The result (Truth or Lie) and the confidence score are displayed.
-4. Use the slider to select the number of most important words you want highlighted.
-5. The words are highlighted in the text below to visualise saliency.
+5. Use the slider to select the number of most important words you want highlighted.
+6. The words are highlighted in the text below to visualise saliency.
 
 ## Installation
 
@@ -45,11 +45,13 @@ Feel free to contribute to this project by opening issues or submitting pull req
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License.
 
 ## Acknowledgments
 
-This web app was created for educational purposes and to accompany our publication.
+This application was developed as part of our research in the field of NLP. It serves as a demonstration in the context our publication.
+<!-- If you find this application useful in your work, please consider citing our scientific paper for reference: -->
+
 
 ## Try it 
 You can access the live version of the app here: [Live Demo](https://defence-argument-classification.streamlit.app/)
