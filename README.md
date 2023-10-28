@@ -17,10 +17,11 @@ This web application uses AI-powered natural language processing to analyse lega
 ## Usage
 
 1. Enter a defense argument without using quotation marks.
-2. Click the "Detect" button to obtain lie detection results.
-3. The result (True or False) and the confidence score are displayed.
+2. Alternatively select one from the provided list.
+3. Click the "Detect" button to obtain lie detection results.
+4. The result (Truth or Lie) and the confidence score are displayed.
 4. Use the slider to select the number of most important words you want highlighted.
-5. Important words are highlighted in the input text to visualise saliency.
+5. The words are highlighted in the text below to visualise saliency.
 
 ## Installation
 
