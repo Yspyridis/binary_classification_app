@@ -68,8 +68,8 @@ def highlight_top_words(tokens, top_indices):
     return ' '.join(highlighted_text)
 
 def run_ml_model(text):
-    tokenizer = AutoTokenizer.from_pretrained("dlentr/lie_detection_distilbert", token=auth_token)
-    model = AutoModelForSequenceClassification.from_pretrained("dlentr/lie_detection_distilbert", token=auth_token)
+    tokenizer = AutoTokenizer.from_pretrained("dlentr/lie_detection_distilbert")
+    model = AutoModelForSequenceClassification.from_pretrained("dlentr/lie_detection_distilbert")
     inputs = tokenizer.encode(text, padding=True, truncation=True, return_tensors='pt')
     # input_ids = inputs[0].tolist()
     outputs = model(inputs)
@@ -159,7 +159,6 @@ def text_input_page():
         st.markdown(highlighted_text, unsafe_allow_html=True)
 
 
-auth_token = "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"
 num_top_tokens = 10
 
 home_page()
