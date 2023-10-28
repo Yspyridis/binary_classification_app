@@ -60,7 +60,7 @@ def highlight_top_words(tokens, top_indices):
 
     for index, word in enumerate(tokens):
         if index in top_indices:
-            highlighted_text.append(f'<span style="color: red;">{word}</span>')
+            highlighted_text.append(f'<span style="color: #ff5959;">{word}</span>')
         else:
             highlighted_text.append(word)
 
