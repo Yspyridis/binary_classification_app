@@ -2,7 +2,6 @@ import numpy as np
 import streamlit as st
 import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
-import requests
 import pandas as pd
 
 def _register_embedding_list_hook(model, embeddings_list):
@@ -43,7 +42,7 @@ def saliency_map(model, input_ids, input_mask):
 
 def get_num_top_tokens():
     global num_top_tokens
-    num_top_tokens = st.slider('Number of top words', 10, 100, 35)
+    num_top_tokens = st.slider('Number of top tokens', 10, 100, 35)
 
 def get_top_indices(salience_scores, n):
     indexed_scores = [(index, float(score)) for index, score in enumerate(salience_scores)]
@@ -133,11 +132,11 @@ def run_ml_model(text):
 # Steamlit functions
 def home_page():
     st.title("Defense argument classifier")
-    st.write("Where AI analyses legal defenses to uncover the facts.")
+    st.write("Where AI analyses legal defense arguments to uncover the facts.")
 
 def text_input_page():
     st.title("")
-    st.write("Enter a defense argument without putting it in quotation marks. Alternatively select one from the provided list.")
+    st.write("Enter a defense argument in the textfield below. Alternatively select one from the provided list.")
 
     data = pd.read_csv("data.csv")
 
