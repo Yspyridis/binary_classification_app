@@ -112,10 +112,12 @@ def run_ml_model(text):
         "inputs": text,
     })
 
+    result = 1 if output[0][0]['label'] == 'POSITIVE' else 0
+
     print(output) # POSITIVE is 1, NEGATIVE is 0
     highlighted_text = ""
-    result = "1"
-    confidence = "1"
+    # result = "1"
+    confidence = output[0][result]['score']
     return result, confidence, highlighted_text
 
 # Steamlit functions
