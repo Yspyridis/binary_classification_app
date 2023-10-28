@@ -45,3 +45,10 @@ Feel free to contribute to this project by opening issues or submitting pull req
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+This web app was created for educational purposes and to accompany our publication.
+
+## Try it 
+You can access the live version of the app here: [Live Demo](https://defence-argument-classification.streamlit.app/)
