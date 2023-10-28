@@ -106,18 +106,18 @@ def run_ml_model(text):
     API_URL = "https://api-inference.huggingface.co/models/dlentr/lie_detection_distilbert"
     headers = {"Authorization": f"Bearer {auth_token}"}
 
-
-
     output = query({
         "inputs": text,
     })
 
-    result = 1 if output[0][0]['label'] == 'POSITIVE' else 0
+    best_class = max(output[0], key=lambda x: x['score'])
+    best_label = best_class['label']
+    confidence = best_class['score']
+    result = 1 if best_label == 'POSITIVE' else 0
 
     print(output) # POSITIVE is 1, NEGATIVE is 0
     highlighted_text = ""
-    # result = "1"
-    confidence = output[0][result]['score']
+
     return result, confidence, highlighted_text
 
 # Steamlit functions
