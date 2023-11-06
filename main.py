@@ -126,8 +126,23 @@ def run_ml_model(text):
 
     top_indices = get_top_indices(saliency_scores, num_top_tokens)
     highlighted_text = highlight_top_words(salience_tokens, top_indices)
+    saliency_df = create_saliency_table(saliency_scores, salience_tokens, top_indices)
 
-    return result, confidence, highlighted_text
+    return result, confidence, highlighted_text, saliency_df
+
+def create_saliency_table(saliency_scores, salience_tokens, indices):
+    saliency_data = {'Token': [], 'Saliency Score': []}
+
+    for index in indices:
+        token = salience_tokens[index]
+        score = saliency_scores[index]
+
+        saliency_data['Token'].append(token)
+        saliency_data['Saliency Score'].append(score)
+
+    saliency_df = pd.DataFrame(saliency_data)
+
+    return saliency_df
 
 # Steamlit functions
 def home_page():
@@ -150,12 +165,20 @@ def text_input_page():
     get_num_top_tokens()
 
     if st.button("Detect", key="submit_button"):
-        result, confidence, highlighted_text = run_ml_model(text)
+        result, confidence, highlighted_text, saliency_df = run_ml_model(text)
         
         st.write("Result:", result)
         st.write("Confidence:", confidence)
 
         st.markdown(highlighted_text, unsafe_allow_html=True)
+        st.write('\n')
+        col1, col2, col3 = st.columns([3,3,3])
+        with col1:
+            st.write('')
+        with col2:
+            st.dataframe(saliency_df)
+        with col3:
+            st.write('')
 
 
 num_top_tokens = 10
