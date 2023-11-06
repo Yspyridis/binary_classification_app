@@ -83,7 +83,7 @@ def run_ml_model(text):
         result = 'Truth'
         confidence = round(probability_class_0*100,2)
     else:
-        result = 'Lie'
+        result = 'Deceptive'
         confidence = round(probability_class_1*100,2) 
  
     # def query(payload):
@@ -118,7 +118,7 @@ def run_ml_model(text):
     # model = AutoModelForSequenceClassification.from_pretrained("dlentr/lie_detection_distilbert")
     # inputs = tokenizer.encode(text, padding=True, truncation=True, return_tensors='pt')
     salience_tokens = tokenizer.convert_ids_to_tokens(inputs[0])
-    tokens = tokenizer(text)
+    tokens = tokenizer(text, max_length=512, truncation=True)
     input_ids = torch.tensor([tokens['input_ids']], dtype=torch.long) #perhaps has to be filled to size of tensor
     attention_ids = torch.tensor([tokens['attention_mask']], dtype=torch.long)
 
