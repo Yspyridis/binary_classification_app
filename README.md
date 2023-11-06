@@ -12,7 +12,7 @@ This web application uses AI-powered natural language processing to analyse lega
 
 ## Preview
 
-![Alt Text](preview.png)
+![Alt Text](preview2.png)
 
 ## Usage
 
