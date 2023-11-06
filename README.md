@@ -7,7 +7,7 @@ This web application uses AI-powered natural language processing to analyse lega
 - Binary classification of defense arguments.
 - Confidence score for the classification.
 - Explainability through highlighting of important words that affect the outcome.
-- User-friendly web interface.
+- User-friendly interface.
 - Based on a state-of-the-art fine-tuned DistilBERT model for classification and saliency analysis.
 
 ## Preview
@@ -22,6 +22,7 @@ This web application uses AI-powered natural language processing to analyse lega
 4. The result (Truth or Lie) and the confidence score are displayed.
 5. Use the slider to select the number of most important words you want highlighted.
 6. The words are highlighted in the text below to visualise saliency.
+7. (NEW) A table with the saliency score of each token is displayed under the highlighted text.
 
 ## Installation
 
