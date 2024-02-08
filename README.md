@@ -1,10 +1,10 @@
-# Defence argument classifier
+# Police interview statement classifier
 
-This web application uses AI-powered natural language processing to analyse legal defense arguments and uncover the truth. It provides lie detection results (truthful or not) and highlights the words that mostly affect the outcome.
+This web application uses AI-powered natural language processing to analyse statements made during police interviews and determine their validity. It provides lie detection results (truthful or deceptive) and highlights the words that mostly affect the outcome.
 
 ## Features
 
-- Binary classification of defense arguments.
+- Binary classification of statements.
 - Confidence score for the classification.
 - Explainability through highlighting of important words that affect the outcome.
 - User-friendly interface.
@@ -16,8 +16,8 @@ This web application uses AI-powered natural language processing to analyse lega
 
 ## Usage
 
-1. Enter a defense argument without using quotation marks.
-2. Alternatively select an argument from the provided list.
+1. Enter a statement without using quotation marks.
+2. Alternatively select a statement from the provided list.
 3. Click the "Detect" button to obtain the lie detection outcome.
 4. The result (Truth or Lie) and the confidence score are displayed.
 5. Use the slider to select the number of most important words you want highlighted.
@@ -38,7 +38,7 @@ This web application uses AI-powered natural language processing to analyse lega
 
 ## How It Works
 
-The lie detection model is powered by the DistilBERT model, which is fine-tuned for binary classification on a curated dataset of defense arguments. It also calculates the saliency of words in the input text to highlight the most important terms for the decision.
+The lie detection model is powered by the DistilBERT model, which is fine-tuned for binary classification on a curated dataset of statements. It also calculates the saliency of words in the input text to highlight the most important terms for the decision.
 
 ## Contributing
 

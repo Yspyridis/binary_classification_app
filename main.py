@@ -146,12 +146,12 @@ def create_saliency_table(saliency_scores, salience_tokens, indices):
 
 # Steamlit functions
 def home_page():
-    st.title("Defense argument classifier")
-    st.write("Where AI analyses legal defense arguments to uncover the facts.")
+    st.title("Statement classifier")
+    st.write("Where AI analyses statements made during police interviews to uncover the facts.")
 
 def text_input_page():
     st.title("")
-    st.write("Enter a defense argument in the textfield below. Alternatively select one from the provided list.")
+    st.write("Enter a statement in the textfield below. Alternatively select one from the provided list.")
 
     data = pd.read_csv("data.csv")
 
