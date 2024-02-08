@@ -55,4 +55,4 @@ This application was developed as part of our research in the field of NLP. It s
 
 
 ## Try it 
-You can access the live version of the app here: [Live Demo](https://defence-argument-classification.streamlit.app/)
+You can access the live version of the app here: [Live Demo](https://statement-classification.streamlit.app/)
